@@ -1,0 +1,9 @@
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <img src="{{ url_for('static', filename='icons/logo.svg') }}" />
+
+    {% if user %}
+        {% include "main/sidenav/sidenav-loggedin.html" %}
+    {% else %}
+        {% include "main/sidenav/sidenav-notloggedin.html" %}
+    {% endif %}
+</ul>

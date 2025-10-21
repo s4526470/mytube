@@ -1,0 +1,13 @@
+flask
+flask-session
+flask-sqlalchemy
+flask-migrate
+flask-restful
+flask-uploads
+requests
+authlib
+cffi
+six
+python-dotenv
+werkzeug==0.16.1
+gunicorn

@@ -1,0 +1,39 @@
+/* Side nav large screens */
+body {
+  padding-left: 300px;
+}
+.side-nav-pad {
+    padding-right: 200px;
+}
+@media only screen and (max-width : 992px) {
+  body, footer {
+    padding-left: 0;
+  }
+}
+
+/* Padding for side-nav sub category list items */
+.side-nav-sub-cat-pad {
+    padding-left: 20px;
+}
+
+.side-nav-icon {
+    vertical-align: text-bottom;
+}
+
+@media only screen and (min-width: 900px) {
+    .search {
+        max-width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .search {
+        min-width: 80%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .search {
+        min-width: 25%;
+    }
+}

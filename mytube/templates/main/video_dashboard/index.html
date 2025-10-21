@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <h1>Your Videos</h1>
+
+    <p>Hi {{ user.given_name }}, you will find your uploaded videos here! If you don't have any, start uploading content now, it's easy!</p>
+
+    {% include "main/video_dashboard/upload_form.html" %}
+
+    {% include "main/video_dashboard/uploads.html" %}
+
+{% endblock %}

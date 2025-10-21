@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-content">
+
+
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('main_routes.dashboard') }}">
+            <div class="row">
+                <div class="col s12">
+                    <span class="card-title">Video Upload</span>
+                </div>
+
+                <div class="input-field col s12">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" placeholder="Video Title" autocomplete="off">
+                </div>
+
+                <div class="input-field col s12">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Select video <i class="material-icons right">video_library</i></span>
+                            <input type="file" name="video">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                        <span class="helper-text" data-error="wrong" data-success="right">Allowed video types: {{ allowed_uploads }}</span>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">cloud_upload</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

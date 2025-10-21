@@ -1,0 +1,35 @@
+<div class="container" style="padding-top: 0.8rem;">
+    <div>
+        <img style="margin-left: -0.85rem" class="side-nav-icon" src="{{ user.picture_url }}" width="20"
+             height="20"/><strong style="padding-left: 0.5rem">Hi {{ user.given_name }} {{ user.family_name }}</strong>
+    </div>
+    <div style="padding-top: 0.4rem;">
+        <img style="margin-left: -1rem; padding-right: 0.4rem;" class="side-nav-icon"
+             src="{{ url_for('static', filename='icons/email.svg') }}"/>Email: <code style="font-size: 10px;">{{
+        user.email }}</code>
+    </div>
+</div>
+
+<hr>
+
+<li>
+    <a href="{{ url_for('main_routes.home') }}">
+        <img class="side-nav-icon" src="{{ url_for('static', filename='icons/home.svg') }}" width="19" height="19"/>
+        Home
+    </a>
+</li>
+<li>
+    <a href="{{ url_for('main_routes.dashboard') }}">
+        <img class="side-nav-icon" src="{{ url_for('static', filename='icons/video-library.svg') }}" width="19"
+             height="19"/> Your videos
+    </a>
+</li>
+<li>
+    {% include "main/sidenav/about-trigger.html" %}
+</li>
+<li>
+    <a href="{{ url_for('auth_routes.logout') }}">
+        <img class="side-nav-icon" src="{{ url_for('static', filename='icons/sign_out.svg') }}" width="19" height="19"/>
+        Sign out
+    </a>
+</li>

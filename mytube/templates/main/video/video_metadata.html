@@ -1,0 +1,7 @@
+<div class="card-content">
+    <p>{{ video.upload_datetime.day }} {{ utils.get_month(video.upload_datetime.month) }} {{ video.upload_datetime.year }}</p>
+    <p>Original video file: {{ video.original_filename }}</p>
+    <p style="padding-top: 0.5rem;">
+        <img class="responsive-img circle side-nav-icon" src="{{ video.user.picture_url }}" width="19" height="19"> {{ video.user.given_name }} {{ video.user.family_name }}
+    </p>
+</div>

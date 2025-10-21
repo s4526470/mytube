@@ -1,0 +1,17 @@
+<div class="row">
+{% for video in videos %}
+
+        <div class="col s12 m6 l6">
+            <div class="card">
+                <div class="card-image">
+                    <a href="{{ url_for('main_routes.video_page', video_id=video.id) }}">
+                        <img src="{{ url_for('static', filename='video-placeholder.jpg') }}">
+                        <span class="card-title">{{ video.title }}</span>
+                    </a>
+                </div>
+
+                {% include "main/video/video_metadata.html" %}
+            </div>
+        </div>
+{% endfor %}
+</div>

@@ -1,0 +1,89 @@
+{% include "main/video/comments/comment-box.html" %}
+
+<div id="comments"></div>
+
+<script>
+    // Get the video id
+    let url_path = window.location.pathname.split('/');
+    const video_id = url_path[url_path.length -1];
+
+     fetch(`/api/comments/${video_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            displayComments(data);
+        });
+
+    function displayCommentBox() {
+        node = document.getElementById('comment-box');
+
+        let card = document.createElement('div');
+        card.classList.add('card');
+
+        let cardContent = document.createElement('div');
+        cardContent.classList.add('card-content');
+
+        inputField = document.createElement('div');
+        inputField.classList.add('input-field');
+
+        let icon = document.createElement('i');
+        icon.classList.add('material-icons', 'prefix')
+        let iconText = document.createTextNode('insert_comment');
+
+        let textarea = document.createElement('textarea');
+        textarea.classList.add('materialize-textarea');
+        textarea.id = 'textarea-id';
+        let label = document.createElement('label');
+        let labelText = document.createTextNode('New comment');
+        label.htmlFor = textarea.id;
+
+
+        card.appendChild(cardContent);
+        cardContent.appendChild(inputField);
+        inputField.appendChild(icon);
+        icon.appendChild(iconText);
+        inputField.appendChild(textarea);
+        inputField.appendChild(label);
+        label.appendChild(labelText);
+
+        node.appendChild(card);
+    }
+
+    function displayComments(comments) {
+        commentsNode = document.getElementById('comments');
+
+        // Remove existing comments (if any)
+        commentsNode.innerHTML = '';
+
+        comments.forEach(comment => {
+            let card = document.createElement('div');
+            card.classList.add('card');
+
+            let cardContent = document.createElement('div');
+            cardContent.classList.add('card-content');
+
+            let cardTitle = document.createElement('span');
+            let title = document.createTextNode(` ${comment.user.given_name} ${comment.user.family_name}`);
+
+            let cardText = document.createElement('p');
+            let cardProfilePic = document.createElement('img');
+            cardProfilePic.src = comment.user.picture_url;
+            cardProfilePic.classList.add('responsive-img', 'circle', 'side-nav-icon');
+            cardProfilePic.height = 19;
+            cardProfilePic.width = 19;
+            let content = document.createTextNode(comment.value);
+
+            card.appendChild(cardContent);
+            cardContent.appendChild(cardTitle);
+            cardTitle.appendChild(cardProfilePic);
+            cardTitle.appendChild(title);
+            cardContent.appendChild(document.createElement('hr'));
+            cardContent.appendChild(cardText);
+            cardText.appendChild(content);
+
+            commentsNode.appendChild(card)
+        });
+
+    }
+
+</script>

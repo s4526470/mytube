@@ -1,0 +1,20 @@
+<div class="navbar-fixed">
+    <nav class="red">
+        <div class="nav-wrapper">
+            <ul>
+                <li>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                </li>
+                <li class="search">
+                    <form action="{{ url_for('main_routes.home') }}" method="post" autocomplete="off">
+                        <div class="input-field">
+                            <input id="search" name="search" type="search" required autocomplete="off">
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,56 @@
+{% if user %}
+    <div class="card">
+        <div class="card-content">
+            <div class="input-field">
+                <i class="material-icons prefix">insert_comment</i>
+                <textarea name="comment" id="comment" cols="30" rows="10" class="materialize-textarea"></textarea>
+                <label for="comment">New comment</label>
+            </div>
+            <button class="btn-flat waves-effect waves-teal" type="submit" name="action" onclick="submitComment()">
+                Submit comment <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+{% endif %}
+
+<script>
+    async function postData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    function submitComment() {
+        commentNode = document.getElementById('comment');
+        comment = commentNode.value;
+
+        if(!comment) {
+            console.log('Comment box is empty');
+            return;
+        }
+
+        // Get the video id
+        let url_path = window.location.pathname.split('/');
+        const video_id = url_path[url_path.length -1];
+
+        postData('/api/comments', {comment: comment, video_id: video_id})
+            .then((data) => {
+                console.log(data);
+                displayComments(data);
+            })
+
+        commentNode.value = '';
+    }
+</script>

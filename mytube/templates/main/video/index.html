@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <h1>{{ video.title }}</h1>
+
+    <div class="card">
+        <div class="card-image">
+            <video style="width: 100%;" class="responsive-video" controls>
+                <source src="{{ url_for('static', filename='videos/' + video.filename) }}" type="{{ video.content_type }}">
+            </video>
+        </div>
+
+        {% include "main/video/video_metadata.html" %}
+    </div>
+
+    {% include "main/video/comments/index.html" %}
+
+{% endblock %}

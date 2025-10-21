@@ -1,0 +1,15 @@
+<li>
+    <a href="{{ url_for('main_routes.home') }}">
+        <img class="side-nav-icon" src="{{ url_for('static', filename='icons/home.svg') }}" width="19" height="19"/>
+        Home
+    </a>
+</li>
+<li>
+    <a href="{{ url_for('auth_routes.login') }}">
+        <img class="side-nav-icon" src="{{ url_for('static', filename='icons/sign_in.svg') }}" width="19" height="19"/>
+        Sign in
+    </a>
+</li>
+<li>
+    {% include "main/sidenav/about-trigger.html" %}
+</li>

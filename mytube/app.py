@@ -1,3 +1,12 @@
+import werkzeug
+import werkzeug.utils
+import werkzeug.datastructures
+
+# --- 👇 加上这一段 monkey patch 来兼容旧版 flask_uploads ---
+werkzeug.secure_filename = werkzeug.utils.secure_filename
+werkzeug.FileStorage = werkzeug.datastructures.FileStorage
+# ----------------------------------------------------------
+
 from flask import Flask
 from flask_uploads import configure_uploads
 
@@ -47,11 +56,11 @@ def create_app(config_object="mytube.settings"):
         import mytube.utils as utils
         return dict(utils=utils, title='MyTube')
 
-    # Register extensions at the end. Some extensions like Flask-RESTFul
-    # require API resources to be registered before initialisation.
+    # Register extensions at the end.
     register_extensions(app)
 
     return app
+
 
 
 # if __name__ == '__main__':

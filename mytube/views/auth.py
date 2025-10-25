@@ -10,13 +10,13 @@ from mytube.models import User
 auth_routes = Blueprint('auth_routes', __name__)
 
 # ✅ 重新注册 Auth0 元数据（使用原有的 auth 实例）
-auth.register(
-    name='auth0',
-    client_id=settings.AUTH_CLIENT_ID,
-    client_secret=settings.AUTH_CLIENT_SECRET,
-    client_kwargs={'scope': 'openid profile email'},
-    server_metadata_url=f'https://{settings.AUTH_DOMAIN}/.well-known/openid-configuration'
-)
+# auth.register(
+#     name='auth0',
+#     client_id=settings.AUTH_CLIENT_ID,
+#     client_secret=settings.AUTH_CLIENT_SECRET,
+#     client_kwargs={'scope': 'openid profile email'},
+#     server_metadata_url=f'https://{settings.AUTH_DOMAIN}/.well-known/openid-configuration'
+# )
 
 # 🔒 登录保护装饰器
 def require_auth(f):

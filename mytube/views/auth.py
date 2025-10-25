@@ -3,20 +3,11 @@ from six.moves.urllib.parse import urlencode
 from functools import wraps
 import logging
 
-from mytube.extensions import auth, db
+from mytube.extensions import oauth, db  # ✅ 从 oauth 导入（不是 auth）
 import mytube.settings as settings
 from mytube.models import User
 
 auth_routes = Blueprint('auth_routes', __name__)
-
-# ✅ 重新注册 Auth0 元数据（使用原有的 auth 实例）
-# auth.register(
-#     name='auth0',
-#     client_id=settings.AUTH_CLIENT_ID,
-#     client_secret=settings.AUTH_CLIENT_SECRET,
-#     client_kwargs={'scope': 'openid profile email'},
-#     server_metadata_url=f'https://{settings.AUTH_DOMAIN}/.well-known/openid-configuration'
-# )
 
 # 🔒 登录保护装饰器
 def require_auth(f):
@@ -35,7 +26,7 @@ def require_auth(f):
 def auth_login_handler():
     redirect_uri = settings.AUTH_CALLBACK_URL
     print("🚀 redirect_uri =", redirect_uri)
-    return auth.auth0.authorize_redirect(
+    return oauth.auth0.authorize_redirect(   # ✅ 改成 oauth.auth0
         redirect_uri=redirect_uri,
         scope="openid profile email"
     )
@@ -45,10 +36,10 @@ def auth_login_handler():
 @auth_routes.route('/callback')
 def auth_callback_handler():
     print("🔍 Callback request args:", request.args)
-    token = auth.auth0.authorize_access_token()
+    token = oauth.auth0.authorize_access_token()  # ✅ 改成 oauth.auth0
     print("🪙 TOKEN:", token)
 
-    user_info = token.get('userinfo') or auth.auth0.get('userinfo').json()
+    user_info = token.get('userinfo') or oauth.auth0.get('userinfo').json()
     print("🧩 USER INFO:", user_info)
 
     session['jwt_payload'] = user_info
